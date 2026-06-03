@@ -1,6 +1,7 @@
 /*rgb(30, 80, 190)*/
+/*rgb(17, 24, 68)*/
 .header {
-  background-color: rgb(17, 24, 68);
+  background-color: rgb(34, 40, 49);
   color: white;
   padding-left: 15px;
   padding-right: 15px;
@@ -18,6 +19,7 @@
 
 .header .header-link {
   text-decoration: none;
+  color: white;
 }
 
 .header .nav-left {
@@ -38,7 +40,6 @@
 
 .header .logo-text {
   font-size: 25px;
-  color: white;
   margin-left: 15px;
 }
 
@@ -66,7 +67,7 @@
 }
 
 .header .search-button {
-  background-color: rgb(114, 136, 174);
+  background-color: rgb(223, 208, 184);
   width: 50px;
   cursor: pointer;
   border: none;
@@ -87,10 +88,8 @@
 
 .header .bookmarks-icon {
   transform: scale(1.3);
-  cursor: pointer;
 }
 
 .header .user-avatar {
   margin-left: 20px;
-  cursor: pointer;
 }

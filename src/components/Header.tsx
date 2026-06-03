@@ -22,12 +22,15 @@ function Header() {
         <input className="search-bar" type="Text" placeholder="Search for anything" />
 
         <button className="search-button">
-          <SearchIcon className = "search-icon" />
+          <SearchIcon className="search-icon" />
         </button>
       </div>
 
       <div className="nav-right">
-        <BookmarksIcon className="bookmarks-icon"/>
+        <NavLink className="header-link" to="/bookmarks">
+          <BookmarksIcon className="bookmarks-icon" />
+        </NavLink>
+
         <Avatar className="user-avatar">
           <PersonIcon />
         </Avatar>

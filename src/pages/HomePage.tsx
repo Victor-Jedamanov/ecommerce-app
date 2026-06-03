@@ -4,14 +4,13 @@ import './HomePage.css';
 function HomePage() {
   return (
     <>
-      <title>Home Page</title>
+      <title>CompAmazon</title>
 
       <div className="home-page" >
-
         <Header />
 
         <div>
-          <p>Test text</p>
+          <p>This is the homepage</p>
         </div>
 
       </div>

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
+import BookmarksPage from './pages/BookmarksPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
 
@@ -7,6 +8,7 @@ function App() {
   return (
     <Routes>
       <Route index element={<HomePage />} />
+      <Route path="/bookmarks" element={<BookmarksPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
