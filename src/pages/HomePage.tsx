@@ -1,8 +1,21 @@
+import Header from '../components/Header';
 import './HomePage.css';
 
 function HomePage() {
   return (
-    <div>This is the homepage</div>
+    <>
+      <title>Home Page</title>
+
+      <div className="home-page" >
+
+        <Header />
+
+        <div>
+          <p>Test text</p>
+        </div>
+
+      </div>
+    </>
   );
 }
 

@@ -1,6 +1,20 @@
+import Header from '../components/Header';
+import './NotFoundPage.css';
+
 function NotFoundPage() {
   return (
-    <div>Page not found</div>
+    <>
+      <title>Page Not Found</title>
+
+      <div className="not-found-page">
+
+        <Header />
+
+        <div>
+          <p>Page not found</p>
+        </div>
+      </div>
+    </>
   );
 }
 
