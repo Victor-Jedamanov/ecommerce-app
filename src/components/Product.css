@@ -1,6 +1,6 @@
 .product-block {
   background-color: rgba(var(--light-primary), 0.7);
-  height: 27rem;
+  height: 28rem;
   width: 16rem;
 
   border-radius: 0.7rem;
@@ -61,7 +61,13 @@
   display: flex;
 }
 
-.product-footer {
+.product-price {
   padding-top: 0.5rem;
   font-size: 1.6rem;
+}
+
+.product-amount-sold {
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+  color: rgb(var(--light-secondary))
 }

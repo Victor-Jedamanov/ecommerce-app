@@ -3,7 +3,23 @@ import Rating from '@mui/material/Rating';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import './Product.css';
 
-function Product({ productImageSRC }: { productImageSRC: string }) {
+interface productInfo {
+  asin: string;
+  product_title: string;
+  product_price: string;
+  product_original_price: string;
+  product_star_rating: string;
+  product_num_ratings: string;
+  product_image: string;
+  is_prime: boolean;
+  amount_sold: string;
+  delivery_info: string;
+  productStatus: string;
+}
+
+function Product({ productInfo }: { productInfo: productInfo }) {
+  const productLink = `https://amazon.com/dp/${productInfo.asin}`;
+
   return (
     <div className="product-block">
       <div className="product-header">
@@ -12,12 +28,12 @@ function Product({ productImageSRC }: { productImageSRC: string }) {
             <BookmarkAddIcon className="bookmark-add-icon" />
           </button>
         </div>
-        <img className="product-image" src={productImageSRC} />
+        <img className="product-image" src={productInfo.product_image} />
       </div>
       <div className="product-content" >
         <a
           className="product-link"
-          href="https://amazon.com/dp/B00MNV8E0C"
+          href={productLink}
           target="_blank"
           rel="noopener roreferrer"
         >
@@ -32,7 +48,7 @@ function Product({ productImageSRC }: { productImageSRC: string }) {
               cursor: "pointer"
             }}
           >
-            Amazon Basics Wired QWERTY Keyboard, Works with Windows, Plug and Play, Easy to Use with Media Control, Full-Sized, Black
+            {productInfo["product_title"]}
           </Typography>
         </a>
         <div className="product-rating-container" >
@@ -42,7 +58,7 @@ function Product({ productImageSRC }: { productImageSRC: string }) {
               fontSize: "0.8rem"
             }}
           >
-            4.7
+            {productInfo["product_star_rating"]}
           </Typography>
           <Rating
             sx={{
@@ -51,12 +67,15 @@ function Product({ productImageSRC }: { productImageSRC: string }) {
               marginTop: "0.1rem"
             }}
             precision={0.5}
-            value={4.7}
+            value={Number(productInfo["product_star_rating"])}
             readOnly
           />
         </div>
-        <div className="product-footer" >
-          $500.00
+        <div className="product-price" >
+          {productInfo["product_price"]}
+        </div>
+        <div className="product-amount-sold" >
+          {productInfo["amount_sold"]}
         </div>
       </div>
     </div>

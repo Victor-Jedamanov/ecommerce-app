@@ -6,8 +6,10 @@ function BookmarksPage() {
     <>
       <title>CompAmazon Bookmarks</title>
 
+      <Header />
+
       <div className="bookmarks-page">
-        <Header />
+        
 
         <div>
           <p>This is the bookmarks page</p>
