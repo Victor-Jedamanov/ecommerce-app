@@ -1,7 +1,16 @@
+:root {
+  --base-primary: 57, 62, 70;
+  --base-secondary: 34, 40, 49;
+  --light-primary: 148, 137, 121;
+  --light-secondary: 223, 208, 184;
+
+  scrollbar-width: none
+}
+
 body {
   font-family: Verdana;
   font-size: 18px;
   color: white;
-  background-color: rgb(57, 62, 70);
+  background-color: rgb(var(--base-primary));
   margin: 0;
 }

@@ -1,0 +1,67 @@
+.product-block {
+  background-color: rgba(var(--light-primary), 0.7);
+  height: 27rem;
+  width: 16rem;
+
+  border-radius: 0.7rem;
+}
+
+.product-header {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+  display: inline-block;
+  position: relative;
+}
+
+.product-header button {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+}
+
+.bookmark-button {
+  background-color: white;
+  height: 3rem;
+  width: 3rem;
+
+  cursor: pointer;
+  border: solid rgb(var(--light-primary));
+  border-radius: 2rem;
+  border-width: 2px;
+}
+
+.bookmark-add-icon {
+  color: rgb(var(--base-primary));
+}
+
+.product-image {
+  height: 14rem;
+  width: 14rem;
+
+  border-top-left-radius: 0.7rem;
+}
+
+.product-content {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.product-link {
+  text-decoration: none;
+  color: white;
+}
+
+.product-content:hover .product-link {
+  color: rgb(var(--base-primary))
+}
+
+.product-rating-container {
+  padding-top: 0.4rem; 
+  display: flex;
+}
+
+.product-footer {
+  padding-top: 0.5rem;
+  font-size: 1.6rem;
+}
