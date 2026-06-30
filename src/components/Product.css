@@ -62,8 +62,18 @@
 }
 
 .product-price {
-  padding-top: 0.5rem;
   font-size: 1.6rem;
+  position: relative;
+}
+
+.product-price-symbol {
+  font-size: 0.9rem;
+  position: absolute;
+  top: 0.2rem;
+}
+
+.product-price-whole {
+  padding-left: 0.7rem;
 }
 
 .product-amount-sold {

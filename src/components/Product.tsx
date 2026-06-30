@@ -1,6 +1,9 @@
+// import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import './Product.css';
 
 interface productInfo {
@@ -17,15 +20,41 @@ interface productInfo {
   productStatus: string;
 }
 
-function Product({ productInfo }: { productInfo: productInfo }) {
+function Product({ productInfo, bookmarks, setBookmarks }: { productInfo: productInfo, bookmarks: productInfo[], setBookmarks: Dispatch<SetStateAction<productInfo[]>> }) {
+  // const [bookmarks, setBookmarks] = useState<productInfo[]>([]);
+
   const productLink = `https://amazon.com/dp/${productInfo.asin}`;
+  const isIncluded = bookmarks.includes(productInfo);
+
+  function addBookmark() {
+    if (isIncluded) {
+      setBookmarks(bookmarks.filter((bookmark) => {
+        return (bookmark != productInfo);
+      }));
+      console.log(`Removed bookmark for ${productInfo.asin}`);
+    } else {
+      setBookmarks([
+        ...bookmarks,
+        productInfo
+      ]);
+      console.log(`Added bookmark for ${productInfo.asin}`);
+    }
+  }
 
   return (
     <div className="product-block">
       <div className="product-header">
         <div>
-          <button className="bookmark-button">
-            <BookmarkAddIcon className="bookmark-add-icon" />
+          <button
+            className="bookmark-button"
+            onClick={addBookmark}
+          >
+            {isIncluded && (
+              <BookmarkAddedIcon className="bookmark-add-icon" />
+            )}
+            {!isIncluded && (
+              <BookmarkAddIcon className="bookmark-add-icon" />
+            )}
           </button>
         </div>
         <img className="product-image" src={productInfo.product_image} />
@@ -71,9 +100,10 @@ function Product({ productInfo }: { productInfo: productInfo }) {
             readOnly
           />
         </div>
-        <div className="product-price" >
-          {productInfo["product_price"]}
-        </div>
+        <span className="product-price" >
+          <span className="product-price-symbol" >$</span>
+          <span className="product-price-whole" >{productInfo["product_price"].substring(1)}</span>
+        </span>
         <div className="product-amount-sold" >
           {productInfo["amount_sold"]}
         </div>
