@@ -21,8 +21,6 @@ interface productInfo {
 }
 
 function Product({ productInfo, bookmarks, setBookmarks }: { productInfo: productInfo, bookmarks: productInfo[], setBookmarks: Dispatch<SetStateAction<productInfo[]>> }) {
-  // const [bookmarks, setBookmarks] = useState<productInfo[]>([]);
-
   const productLink = `https://amazon.com/dp/${productInfo.asin}`;
   const isIncluded = bookmarks.includes(productInfo);
 
@@ -64,7 +62,7 @@ function Product({ productInfo, bookmarks, setBookmarks }: { productInfo: produc
           className="product-link"
           href={productLink}
           target="_blank"
-          rel="noopener roreferrer"
+          rel="noopener noreferrer"
         >
           <Typography
             sx={{
