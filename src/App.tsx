@@ -20,7 +20,7 @@ interface productInfo {
 }
 
 function App() {
-  const [bookmarks, setBookmarks] = useState<productInfo[]>([]);
+  const [bookmarks, setBookmarks] = useState<productInfo[][]>([[], [], []]);
 
   return (
     <Routes>

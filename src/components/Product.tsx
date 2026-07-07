@@ -1,9 +1,12 @@
-// import { useState } from 'react';
+import { useState } from 'react';
+import type { MouseEvent } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 import './Product.css';
 
 interface productInfo {
@@ -20,21 +23,83 @@ interface productInfo {
   productStatus: string;
 }
 
-function Product({ productInfo, bookmarks, setBookmarks }: { productInfo: productInfo, bookmarks: productInfo[], setBookmarks: Dispatch<SetStateAction<productInfo[]>> }) {
-  const productLink = `https://amazon.com/dp/${productInfo.asin}`;
-  const isIncluded = bookmarks.includes(productInfo);
+const options = [
+  'Batteries',
+  'Expensive',
+  'Fun'
+];
 
-  function addBookmark() {
+function Product({ productInfo, bookmarks, setBookmarks }: { productInfo: productInfo, bookmarks: productInfo[][], setBookmarks: Dispatch<SetStateAction<productInfo[][]>> }) {
+  const productLink = `https://amazon.com/dp/${productInfo.asin}`;
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedIndexes, setSelectedIndexes] = useState<number[]>(
+    bookmarks.map((bookmarkFolder, folderIndex) => {
+      if (bookmarkFolder.map((productInfo) => {return productInfo.asin}).includes(productInfo.asin)) {
+        return folderIndex;
+      } else {
+        return -1;
+      }
+    }).filter((value) => {
+      return (value > -1);
+    }));
+
+  const open = Boolean(anchorEl);
+  const handleClickListItem = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuItemClick = (
+    _: MouseEvent<HTMLElement>,
+    index: number,
+  ) => {
+    console.log(bookmarks);
+    if (selectedIndexes.includes(index)) {
+      setSelectedIndexes(
+        selectedIndexes.filter((idx) => {
+          return (idx != index);
+        }));
+    } else {
+      setSelectedIndexes([
+        ...selectedIndexes,
+        index
+      ]);
+    }
+
+    addBookmark(index);
+    setAnchorEl(null);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  function addBookmark(index: number) {
+    const isIncluded = bookmarks[index].includes(productInfo);
     if (isIncluded) {
-      setBookmarks(bookmarks.filter((bookmark) => {
-        return (bookmark != productInfo);
-      }));
+      setBookmarks(
+        bookmarks.map((bookmarkFolder, folderIndex) => {
+          if (folderIndex === index) {
+            return bookmarkFolder.filter((bookmark) => {
+              return (bookmark != productInfo);
+            });
+          } else {
+            return bookmarkFolder;
+          }
+        }));
       console.log(`Removed bookmark for ${productInfo.asin}`);
     } else {
-      setBookmarks([
-        ...bookmarks,
-        productInfo
-      ]);
+      setBookmarks(
+        bookmarks.map((bookmarkFolder, folderIndex) => {
+          if (folderIndex === index) {
+            return ([
+              ...bookmarkFolder,
+              productInfo
+            ]);
+          } else {
+            return bookmarkFolder;
+          }
+        }));
       console.log(`Added bookmark for ${productInfo.asin}`);
     }
   }
@@ -45,15 +110,36 @@ function Product({ productInfo, bookmarks, setBookmarks }: { productInfo: produc
         <div>
           <button
             className="bookmark-button"
-            onClick={addBookmark}
+            onClick={handleClickListItem}
           >
-            {isIncluded && (
+            {selectedIndexes.length > 0 && (
               <BookmarkAddedIcon className="bookmark-add-icon" />
             )}
-            {!isIncluded && (
+            {selectedIndexes.length === 0 && (
               <BookmarkAddIcon className="bookmark-add-icon" />
             )}
           </button>
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          >
+            {options.map((option, index) => (
+              <MenuItem
+                sx={{
+                  "&.Mui-selected": { backgroundColor: "hotpink", color: "#fff" },
+                  "&.Mui-selected:hover": {
+                    backgroundColor: "blue",
+                  },
+                }}
+                key={option}
+                selected={selectedIndexes.includes(index)}
+                onClick={(event) => handleMenuItemClick(event, index)}
+              >
+                {option}
+              </MenuItem>
+            ))}
+          </Menu>
         </div>
         <img className="product-image" src={productInfo.product_image} />
       </div>

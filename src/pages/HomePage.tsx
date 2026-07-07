@@ -22,7 +22,7 @@ const response = { "products": [{ "asin": "B00MNV8E0C", "product_title": "Amazon
 
 const data = response["products"]
 
-function HomePage({ bookmarks, setBookmarks }: { bookmarks: productInfo[], setBookmarks: Dispatch<SetStateAction<productInfo[]>> }) {
+function HomePage({ bookmarks, setBookmarks }: { bookmarks: productInfo[][], setBookmarks: Dispatch<SetStateAction<productInfo[][]>> }) {
 
 
   return (

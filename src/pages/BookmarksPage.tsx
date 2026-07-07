@@ -18,7 +18,7 @@ interface productInfo {
   productStatus: string;
 }
 
-function BookmarksPage({ bookmarks, setBookmarks }: { bookmarks: productInfo[], setBookmarks: Dispatch<SetStateAction<productInfo[]>> }) {
+function BookmarksPage({ bookmarks, setBookmarks }: { bookmarks: productInfo[][], setBookmarks: Dispatch<SetStateAction<productInfo[][]>> }) {
   return (
     <>
       <title>CompAmazon Bookmarks</title>
@@ -39,7 +39,7 @@ function BookmarksPage({ bookmarks, setBookmarks }: { bookmarks: productInfo[], 
           container
           spacing={3}
         >
-          {bookmarks.map((productInfo) => {
+          {bookmarks[0].map((productInfo) => {
             return (
               <Grid key={productInfo.asin}>
                 <Product productInfo={productInfo} bookmarks={bookmarks} setBookmarks={setBookmarks} />
