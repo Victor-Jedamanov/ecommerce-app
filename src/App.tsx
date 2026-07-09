@@ -2,30 +2,24 @@ import { useState } from 'react';
 import { Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
 import BookmarksPage from './pages/BookmarksPage';
+import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
 
-interface productInfo {
-  asin: string;
-  product_title: string;
-  product_price: string;
-  product_original_price: string;
-  product_star_rating: string;
-  product_num_ratings: string;
-  product_image: string;
-  is_prime: boolean;
-  amount_sold: string;
-  delivery_info: string;
-  productStatus: string;
-}
+import type { productInfo } from './types/productInfo';
+
+import mirageServer from './server';
 
 function App() {
   const [bookmarks, setBookmarks] = useState<productInfo[][]>([[], [], []]);
+
+  mirageServer();
 
   return (
     <Routes>
       <Route index element={<HomePage bookmarks={bookmarks} setBookmarks={setBookmarks} />} />
       <Route path="/bookmarks" element={<BookmarksPage bookmarks={bookmarks} setBookmarks={setBookmarks} />} />
+      <Route path="/search" element={<SearchPage bookmarks={bookmarks} setBookmarks={setBookmarks} />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
